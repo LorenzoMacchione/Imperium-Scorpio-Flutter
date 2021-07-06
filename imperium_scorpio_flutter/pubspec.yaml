@@ -25,9 +25,12 @@ dependencies:
     sdk: flutter
 
 
+
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+
 
 dev_dependencies:
   flutter_test:
@@ -51,7 +54,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
 
   assets:
-    - assets/
+    - assets/images/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -79,7 +82,13 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
- fonts:
-   - family: orion
-     fonts:
-       -asset: assets/font/orion_regular.otf
+  fonts:
+    - family: orion
+      fonts:
+       - asset: assets/fonts/orion_regular.otf
+    - family: laceration
+      fonts:
+       - asset: assets/fonts/laceration_regular.otf
+    - family: sf
+      fonts:
+       - asset: assets/fonts/sf_outer_limits_distupright.ttf

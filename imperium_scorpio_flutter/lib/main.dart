@@ -2,6 +2,9 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:imperium_scorpio_flutter/Intro.dart';
+import 'package:imperium_scorpio_flutter/SmallCard.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -53,6 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
+     Intro intro = Intro();
     return Stack(
       children:<Widget>[
         Image.asset('assets/image/background_menu.jpg'),
@@ -66,21 +70,45 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: 80,
                   ),
                   Text  (
-                      'Imperium Scorpio',
+                      'IMPERIUM SCORPIO',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontFamily: 'assets/font/orion_regular',
+                        fontFamily: 'orion',
                         color: Colors.white,
                         fontSize: 75
                       ),
                   ),
                   Container(
-                    height: 150,
+                    height: 200,
                   ),
-                  Image.asset(
-                      'assets/image/new_game.png',
-                      alignment: Alignment.center,
-                  )
+                  MaterialButton(
+                      onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context){ return intro.intro(context);}));
+                      },
+                      child:
+                          Stack(
+                            alignment: Alignment.center,
+                            children:<Widget>[
+                               Image.asset(
+                                  'assets/image/new_game.png',
+                                  alignment: Alignment.center,
+                                  scale: 0.5,
+                                ),
+                                Container(
+                                  child:
+                                  Text(
+                                    'New Game',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 25
+                                    )
+                                  )
+                                )
+                              ]
+                          )
+                      ),
+                  SmallCard()
                 ],
             ),
           ),
