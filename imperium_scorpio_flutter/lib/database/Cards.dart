@@ -13,11 +13,11 @@ class Cards{
   int attack=-1;
   int mining=-1;
   int hp=-1;
-  int player=-1;
+
 
   Cards(){}
 
-  setCards(int id, String name, int res1, int res2, int res4, String text, int attack, int mining, int hp, int player){
+  Cards.setCards(int id, String name, int res1, int res2,int res3, int res4, String text, int attack, int mining, int hp){
     this.id = id;
     this.name = name;
     this.res1 = res1;
@@ -28,9 +28,11 @@ class Cards{
     this.attack = attack;
     this.mining = mining;
     this.hp = hp;
-    this.player=player;
   }
 
+  Map<String, dynamic> toMap(){
+    return { 'id':id, 'name': name, 'res1': res1, 'res2':res2,'res3':res3, 'res4':res4,'text':text,'attack':attack,'mining':mining,'hp':hp };
+  }
 
 }
 

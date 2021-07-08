@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
 export "FLUTTER_ROOT=C:\Users\loref\Documents\flutter"
-export "FLUTTER_APPLICATION_PATH=D:\imperium_scorpio_flutter"
+export "FLUTTER_APPLICATION_PATH=D:\Imperium-Scorpio-Flutter\imperium_scorpio_flutter"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_TARGET=lib\main.dart"
 export "FLUTTER_BUILD_DIR=build"
