@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:imperium_scorpio_flutter/database/CardDB.dart';
+import 'package:flutter/services.dart';
 
 import 'Match/UI/MatchUI.dart';
 
@@ -16,6 +17,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     return MaterialApp(
 
 
@@ -45,7 +47,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Stack(
       children:<Widget>[
-        Image.asset('assets/image/background_menu.jpg'),
+        Image.asset('assets/images/background_menu.jpg',
+          fit: BoxFit.fill,
+        ),
         Scaffold(
           backgroundColor: Colors.transparent,
             body: Center(
@@ -80,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             alignment: Alignment.center,
                             children:<Widget>[
                                Image.asset(
-                                  'assets/image/new_game.png',
+                                  'assets/images/new_game.png',
                                   alignment: Alignment.center,
                                   scale: 0.5,
                                ),

@@ -22,12 +22,12 @@ class SmallCard extends StatefulWidget {
 
   class _CardState extends State<SmallCard> {
   late SmallCardModel card;
-  late double width = 60;
-  late double height = 80;
+   double width = 60;
+   double height = 80;
   _CardState(SmallCardModel card, double? width, double? height){
     this.card = card;
     if(width!=null)this.width = width;
-    this.height = height!;
+    if (height!=null)this.height = height;
   }
 
 
