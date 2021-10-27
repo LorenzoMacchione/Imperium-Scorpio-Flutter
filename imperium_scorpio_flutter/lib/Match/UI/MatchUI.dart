@@ -61,7 +61,7 @@ class MatchUI extends StatelessWidget{
                     child: Column(
                       children:[
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
                           child: Image.asset('assets/images/retro_carta.png'),
@@ -69,7 +69,9 @@ class MatchUI extends StatelessWidget{
                           height: 45,
                         ),
                         Container(
-                          width: 10,
+                          child: Image.asset('assets/images/retro_carta.png'),
+                          width: 45,
+                          height: 45,
                         ),
                         Container(
                           child: Image.asset('assets/images/retro_carta.png'),
@@ -77,23 +79,9 @@ class MatchUI extends StatelessWidget{
                           height: 45,
                         ),
                         Container(
-                          width: 10,
-                        ),
-                        Container(
                           child: Image.asset('assets/images/retro_carta.png'),
                           width: 45,
                           height: 45,
-                        ),
-                        Container(
-                          width: 10,
-                        ),
-                        Container(
-                          child: Image.asset('assets/images/retro_carta.png'),
-                          width: 45,
-                          height: 45,
-                        ),
-                        Container(
-                          width: 10,
                         ),
                         Container(
                           child: Image.asset('assets/images/retro_carta.png'),
@@ -181,14 +169,26 @@ class MatchUI extends StatelessWidget{
                       width: 85,
                       height: 85,
                     ),
-                  SmallCard(
-                      card: p9,
-                      width: 56,
-                      height: 70,
+                  Visibility(
+                      child:SmallCard(
+                        card: p9,
+                        width: 56,
+                        height: 70,
+                      ),
+                    visible: false,
                   ),
-                  Image.asset('assets/images/anello_verde.png', scale: 0.94),
-                  Image.asset('assets/images/anello_giallo.png', scale: 0.94),
-                  Image.asset('assets/images/anello_rosso.png', scale: 0.94)
+                  Visibility(
+                    visible: false,
+                    child: Image.asset('assets/images/anello_verde.png', scale: 0.94),
+                  ),
+                  Visibility(
+                    visible: false,
+                    child: Image.asset('assets/images/anello_giallo.png', scale: 0.94),
+                  ),
+                  Visibility(
+                      visible: false,
+                      child: Image.asset('assets/images/anello_rosso.png', scale: 0.94)
+                  ),
                 ],
               ),
               Row(
@@ -202,14 +202,26 @@ class MatchUI extends StatelessWidget{
                           width: 85,
                           height: 85,
                       ),
-                      SmallCard(
-                        card: p7,
-                        width: 56,
-                        height: 70,
+                      Visibility(
+                          child: SmallCard(
+                            card: p7,
+                            width: 56,
+                            height: 70,
+                          ),
+                        visible: false,
                       ),
-                      Image.asset('assets/images/anello_verde.png', scale: 0.94),
-                      Image.asset('assets/images/anello_giallo.png', scale: 0.94),
-                      Image.asset('assets/images/anello_rosso.png', scale: 0.94)
+                      Visibility(
+                        visible: false,
+                        child: Image.asset('assets/images/anello_verde.png', scale: 0.94),
+                      ),
+                      Visibility(
+                        visible: false,
+                        child: Image.asset('assets/images/anello_giallo.png', scale: 0.94),
+                      ),
+                      Visibility(
+                          visible: false,
+                          child: Image.asset('assets/images/anello_rosso.png', scale: 0.94)
+                      ),
                     ]
                   ),
                   Container(width: 15),
@@ -221,14 +233,26 @@ class MatchUI extends StatelessWidget{
                           width: 85,
                           height: 85,
                       ),
-                      SmallCard(
-                        card: p8,
-                        width: 56,
-                        height: 70,
+                      Visibility(
+                          child: SmallCard(
+                            card: p8,
+                            width: 56,
+                            height: 70,
+                          ),
+                        visible: false,
                       ),
-                      Image.asset('assets/images/anello_verde.png', scale: 0.94),
-                      Image.asset('assets/images/anello_giallo.png', scale: 0.94),
-                      Image.asset('assets/images/anello_rosso.png', scale: 0.94)
+                      Visibility(
+                        visible: false,
+                        child: Image.asset('assets/images/anello_verde.png', scale: 0.94),
+                      ),
+                      Visibility(
+                        visible: false,
+                        child: Image.asset('assets/images/anello_giallo.png', scale: 0.94),
+                      ),
+                      Visibility(
+                          visible: false,
+                          child: Image.asset('assets/images/anello_rosso.png', scale: 0.94)
+                      ),
                     ]
                   ),
                 ],
@@ -245,14 +269,26 @@ class MatchUI extends StatelessWidget{
                             width: 85,
                             height: 85,
                         ),
-                        SmallCard(
-                          card: p4,
-                          width: 56,
-                          height: 70,
+                        Visibility(
+                            child:SmallCard(
+                              card: p4,
+                              width: 56,
+                              height: 70,
+                            ),
+                          visible: false,
                         ),
-                        Image.asset('assets/images/anello_verde.png', scale: 0.94),
-                        Image.asset('assets/images/anello_giallo.png', scale: 0.94),
-                        Image.asset('assets/images/anello_rosso.png', scale: 0.94)
+                        Visibility(
+                          visible: false,
+                          child: Image.asset('assets/images/anello_verde.png', scale: 0.94),
+                        ),
+                        Visibility(
+                          visible: false,
+                          child: Image.asset('assets/images/anello_giallo.png', scale: 0.94),
+                        ),
+                        Visibility(
+                            visible: false,
+                            child: Image.asset('assets/images/anello_rosso.png', scale: 0.94)
+                        ),
                       ]
                   ),
                   Container(width: 15),
@@ -264,14 +300,26 @@ class MatchUI extends StatelessWidget{
                           width: 110,
                           height: 110,
                         ),
-                        SmallCard(
-                          card: p5,
-                          width: 56,
-                          height: 70,
+                        Visibility(
+                            child: SmallCard(
+                              card: p5,
+                              width: 56,
+                              height: 70,
+                            ),
+                          visible: false,
                         ),
-                        Image.asset('assets/images/anello_verde.png', scale: 0.94),
-                        Image.asset('assets/images/anello_giallo.png', scale: 0.94),
-                        Image.asset('assets/images/anello_rosso.png', scale: 0.94)
+                        Visibility(
+                          visible: false,
+                          child: Image.asset('assets/images/anello_verde.png', scale: 0.94),
+                        ),
+                        Visibility(
+                          visible: false,
+                          child: Image.asset('assets/images/anello_giallo.png', scale: 0.94),
+                        ),
+                        Visibility(
+                            visible: false,
+                            child: Image.asset('assets/images/anello_rosso.png', scale: 0.94)
+                        ),
                       ]
                   ),
                   Container(width: 15),
@@ -283,14 +331,26 @@ class MatchUI extends StatelessWidget{
                             width: 85,
                             height: 85,
                         ),
-                        SmallCard(
-                          card: p6,
-                          width: 56,
-                          height: 70,
+                        Visibility(
+                            child: SmallCard(
+                              card: p6,
+                              width: 56,
+                              height: 70,
+                            ),
+                          visible: false,
                         ),
-                        Image.asset('assets/images/anello_verde.png', scale: 0.94),
-                        Image.asset('assets/images/anello_giallo.png', scale: 0.94),
-                        Image.asset('assets/images/anello_rosso.png', scale: 0.94)
+                        Visibility(
+                          visible: false,
+                          child: Image.asset('assets/images/anello_verde.png', scale: 0.94),
+                        ),
+                        Visibility(
+                          visible: false,
+                          child: Image.asset('assets/images/anello_giallo.png', scale: 0.94),
+                        ),
+                        Visibility(
+                            visible: false,
+                            child: Image.asset('assets/images/anello_rosso.png', scale: 0.94)
+                        ),
                       ]
                   )
                 ],
@@ -307,14 +367,26 @@ class MatchUI extends StatelessWidget{
                             width: 85,
                             height: 85,
                         ),
-                        SmallCard(
-                          card: p2,
-                          width: 56,
-                          height: 70,
+                        Visibility(
+                            child: SmallCard(
+                              card: p2,
+                              width: 56,
+                              height: 70,
+                            ),
+                          visible: false,
                         ),
-                        Image.asset('assets/images/anello_verde.png', scale: 0.94),
-                        Image.asset('assets/images/anello_giallo.png', scale: 0.94),
-                        Image.asset('assets/images/anello_rosso.png', scale: 0.94)
+                        Visibility(
+                          visible: false,
+                          child: Image.asset('assets/images/anello_verde.png', scale: 0.94),
+                        ),
+                        Visibility(
+                          visible: false,
+                          child: Image.asset('assets/images/anello_giallo.png', scale: 0.94),
+                        ),
+                        Visibility(
+                            visible: false,
+                            child: Image.asset('assets/images/anello_rosso.png', scale: 0.94)
+                        ),
                       ]
                   ),
                   Container(width: 15),
@@ -327,14 +399,26 @@ class MatchUI extends StatelessWidget{
                             width: 85,
                             height: 85,
                         ),
-                        SmallCard(
-                          card: p3,
-                          width: 56,
-                          height: 70,
+                        Visibility(
+                            child:SmallCard(
+                              card: p3,
+                              width: 56,
+                              height: 70,
+                            ),
+                          visible: false,
                         ),
-                        Image.asset('assets/images/anello_verde.png', scale: 0.94),
-                        Image.asset('assets/images/anello_giallo.png', scale: 0.94),
-                        Image.asset('assets/images/anello_rosso.png', scale: 0.94)
+                        Visibility(
+                          visible: false,
+                          child: Image.asset('assets/images/anello_verde.png', scale: 0.94),
+                        ),
+                        Visibility(
+                          visible: false,
+                          child: Image.asset('assets/images/anello_giallo.png', scale: 0.94),
+                        ),
+                        Visibility(
+                            visible: false,
+                            child: Image.asset('assets/images/anello_rosso.png', scale: 0.94)
+                        ),
                       ]
                   ),
                 ],
@@ -348,14 +432,26 @@ class MatchUI extends StatelessWidget{
                         width: 85,
                         height: 85,
                     ),
-                    SmallCard(
-                      card: p1,
-                      width: 56,
-                      height: 70,
+                    Visibility(
+                        child: SmallCard(
+                          card: p1,
+                          width: 56,
+                          height: 70,
+                        ),
+                      visible: false,
                     ),
-                    Image.asset('assets/images/anello_verde.png', scale: 0.94),
-                    Image.asset('assets/images/anello_giallo.png', scale: 0.94),
-                    Image.asset('assets/images/anello_rosso.png', scale: 0.94)
+                    Visibility(
+                      visible: false,
+                        child: Image.asset('assets/images/anello_verde.png', scale: 0.94),
+                    ),
+                    Visibility(
+                        visible: false,
+                        child: Image.asset('assets/images/anello_giallo.png', scale: 0.94),
+                    ),
+                    Visibility(
+                        visible: false,
+                        child: Image.asset('assets/images/anello_rosso.png', scale: 0.94)
+                    ),
                   ]
               ),
 
@@ -366,192 +462,209 @@ class MatchUI extends StatelessWidget{
                       mainAxisSize: MainAxisSize.min,
                         children:[
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              MaterialButton(onPressed: (){},
-                                  child:
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                                        color: Colors.deepPurple,
-                                        boxShadow: [BoxShadow(
-                                            color: Colors.purple.withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 7,
-                                            offset: Offset(0,3)
-                                        )]
-                                    ),
-                                    alignment: Alignment.center,
-                                    width: 50,
-                                    height: 25,
-                                    child: Text (
-                                      'DRAW',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15
+                              Column(
+                                children: [
+                                  Visibility(
+                                      child:MaterialButton(onPressed: (){},
+                                          child:
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                color: Colors.deepPurple,
+                                                boxShadow: [BoxShadow(
+                                                    color: Colors.purple.withOpacity(0.5),
+                                                    spreadRadius: 2,
+                                                    blurRadius: 7,
+                                                    offset: Offset(0,3)
+                                                )]
+                                            ),
+                                            alignment: Alignment.center,
+                                            width: 50,
+                                            height: 25,
+                                            child: Text (
+                                              'DRAW',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15
+                                              ),
+                                            ),
+                                          )
                                       ),
-                                    ),
-                                  )
-                              ),
-                              MaterialButton(onPressed: (){},
-                                  child:
+                                      visible: false,
+                                  ),
                                   Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                                        color: Colors.lightBlue,
-                                        boxShadow: [BoxShadow(
-                                            color: Colors.blue.withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 7,
-                                            offset: Offset(0,3)
-                                        )]
-                                    ),
+                                    width: 40,
+                                    color: Colors.deepPurple,
                                     alignment: Alignment.center,
-                                    width: 50,
-                                    height: 25,
-                                    child: Text (
-                                      'DRAW',
-                                      style: TextStyle(
-                                          fontSize: 15
-                                      ),
+                                    child: Text(
+                                        '${Res1.read()}',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 25
+                                        )
                                     ),
-                                  )
+                                  ),
+                                ],
                               ),
-                              MaterialButton(onPressed: (){},
-                                  child:
+                              Column(
+                                children: [
+                                  Visibility(
+                                      child: MaterialButton(onPressed: (){},
+                                          child:
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                color: Colors.lightBlue,
+                                                boxShadow: [BoxShadow(
+                                                    color: Colors.blue.withOpacity(0.5),
+                                                    spreadRadius: 2,
+                                                    blurRadius: 7,
+                                                    offset: Offset(0,3)
+                                                )]
+                                            ),
+                                            alignment: Alignment.center,
+                                            width: 50,
+                                            height: 25,
+                                            child: Text (
+                                              'DRAW',
+                                              style: TextStyle(
+                                                  fontSize: 15
+                                              ),
+                                            ),
+                                          )
+                                      ),
+                                    visible: false,
+                                  ),
                                   Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                                        color: Colors.black,
-                                        boxShadow: [BoxShadow(
-                                            color: Colors.blueGrey.withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 7,
-                                            offset: Offset(0,3)
-                                        )]
-                                    ),
-                                    alignment: Alignment.center,
-                                    width: 50,
-                                    height: 25,
-                                    child: Text (
-                                      'DRAW',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15
-                                      ),
-                                    ),
-                                  )
-                              ),
-                              MaterialButton(onPressed: (){},
-                                  child:
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                                        color: Colors.white,
-                                        boxShadow: [BoxShadow(
-                                            color: Colors.white.withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 7,
-                                            offset: Offset(0,3)
-                                        )]
-                                    ),
-                                    alignment: Alignment.center,
-                                    width: 50,
-                                    height: 25,
-                                    child: Text (
-                                      'DRAW',
-                                      style: TextStyle(
-                                          fontSize: 15
-                                      ),
-                                    ),
-                                  )
-                              )
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 5,
-                              ),
-                              Container(
-                                width: 40,
-                                color: Colors.deepPurple,
-                                alignment: Alignment.center,
-                                child: Text(
-                                    '${Res1.read()}',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 25
-                                    )
-                                ),
-                              ),
-                              Container(
-                                width: 30,
-                              ),
-                              Container(
-                                  width: 40,
-                                  color: Colors.lightBlue,
-                                  alignment: Alignment.center,
-                                  child:Text(
-                                      '${Res1.read()}',
-                                      style: TextStyle(
-                                          fontSize: 25
+                                      width: 40,
+                                      color: Colors.lightBlue,
+                                      alignment: Alignment.center,
+                                      child:Text(
+                                          '${Res1.read()}',
+                                          style: TextStyle(
+                                              fontSize: 25
+                                          )
                                       )
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Visibility(
+                                      child: MaterialButton(onPressed: (){},
+                                          child:
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                color: Colors.black,
+                                                boxShadow: [BoxShadow(
+                                                    color: Colors.blueGrey.withOpacity(0.5),
+                                                    spreadRadius: 2,
+                                                    blurRadius: 7,
+                                                    offset: Offset(0,3)
+                                                )]
+                                            ),
+                                            alignment: Alignment.center,
+                                            width: 50,
+                                            height: 25,
+                                            child: Text (
+                                              'DRAW',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15
+                                              ),
+                                            ),
+                                          )
+                                      ),
+                                    visible: false,
+                                  ),
+                                  Container(
+                                    width: 40,
+                                    color: Colors.black,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                        '${Res1.read()}',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 25
+                                        )
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Visibility(
+                                      child: MaterialButton(onPressed: (){},
+                                          child:
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                color: Colors.white,
+                                                boxShadow: [BoxShadow(
+                                                    color: Colors.white.withOpacity(0.5),
+                                                    spreadRadius: 2,
+                                                    blurRadius: 7,
+                                                    offset: Offset(0,3)
+                                                )]
+                                            ),
+                                            alignment: Alignment.center,
+                                            width: 50,
+                                            height: 25,
+                                            child: Text (
+                                              'DRAW',
+                                              style: TextStyle(
+                                                  fontSize: 15
+                                              ),
+                                            ),
+                                          )
+                                      ),
+                                    visible: false,
+                                  ),
+                                  Container(
+                                    width: 40,
+                                    color: Colors.white,
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                        '${Res1.read()}',
+                                        style: TextStyle(
+                                            fontSize: 25
+                                        )
+                                    ),
                                   )
+                                ],
                               ),
-                              Container(
-                                width: 30,
-                              ),
-                              Container(
-                                width: 40,
-                                color: Colors.black,
-                                alignment: Alignment.center,
-                                child: Text(
-                                    '${Res1.read()}',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 25
-                                    )
-                                ),
-                              ),
-                              Container(
-                                width: 30,
-                              ),
-                              Container(
-                                width: 40,
-                                color: Colors.white,
-                                alignment: Alignment.center,
-                                child: Text(
-                                    '${Res1.read()}',
-                                    style: TextStyle(
-                                        fontSize: 25
-                                    )
-                                ),
-                              )
                             ],
                           ),
                           SizedBox(height: 8),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SmallCard(card: hc1),
+                              Visibility(child: SmallCard(card: hc1)),
                               Container(
                                 width: 10,
                               ),
-                              SmallCard(card: hc2),
+                              Visibility(child: SmallCard(card: hc2)),
                               Container(
                                 width: 10,
                               ),
-                              SmallCard(card: hc3),
+                              Visibility(child: SmallCard(card: hc3)),
                               Container(
                                 width: 10,
                               ),
-                              SmallCard(card: hc4),
+                              Visibility(
+                                  child: SmallCard(card: hc4),
+                                  visible: false
+                              ),
                               Container(
                                 width: 10,
                               ),
-                              SmallCard(card: hc5),
+                              Visibility(
+                                  child: SmallCard(card: hc5),
+                                visible: false
+                              ),
                             ],
                           ),
                         ]
@@ -562,7 +675,9 @@ class MatchUI extends StatelessWidget{
             ],
           ),
         ),
-      Visibility(child:
+      Visibility(
+        visible: false,
+        child:
         Scaffold(
           backgroundColor: Colors.black.withOpacity(0.7),
           body: Column(
@@ -595,38 +710,40 @@ class MatchUI extends StatelessWidget{
           )
         ),
       ),
-        Visibility(child:
-        Scaffold(
-            backgroundColor: Colors.black.withOpacity(0.7),
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'LOSE',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: 'laceration',
-                        color: Colors.red,
-                        fontSize: 70,
+        Visibility(
+          visible: false,
+          child:
+          Scaffold(
+              backgroundColor: Colors.black.withOpacity(0.7),
+              body: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'LOSE',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: 'laceration',
+                          color: Colors.red,
+                          fontSize: 70,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Text(
-                  'Tocca per continuare',
-                  style: TextStyle(
-                    fontFamily: 'laceration',
-                    color: Colors.red,
-                    fontSize: 21,
+                    ],
                   ),
-                ),
-              ],
-            )
-          ),
+                  Text(
+                    'Tocca per continuare',
+                    style: TextStyle(
+                      fontFamily: 'laceration',
+                      color: Colors.red,
+                      fontSize: 21,
+                    ),
+                  ),
+                ],
+              )
+            ),
         )
       ],
     );
