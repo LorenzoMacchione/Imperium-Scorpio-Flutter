@@ -20,8 +20,6 @@ class SmallCardModel{
   int mining=-1;
   int hp=-1;
 
-  bool visible = false;
-
 
   Cards read(){
     return card;
@@ -41,7 +39,6 @@ class SmallCardModel{
     res2 = c.res2;
     res3 = c.res3;
     res4 = c.res4;
-    visible = true;
   }
 
   /*copy():SmallCard{
@@ -59,7 +56,6 @@ class SmallCardModel{
 
   blank(){
     newCard( Cards());
-    visible=false;
   }
 
 

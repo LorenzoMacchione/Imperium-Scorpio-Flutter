@@ -2,7 +2,7 @@
 
 class ResourceModel{
 
-  int res=5;
+  int res=3;
 
   useRes (int i){
     res -= i;

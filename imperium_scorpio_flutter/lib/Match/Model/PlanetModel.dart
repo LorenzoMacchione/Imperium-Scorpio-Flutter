@@ -2,6 +2,7 @@
 
 
 import 'package:imperium_scorpio_flutter/Match/Model/SmallCardModel.dart';
+import 'package:imperium_scorpio_flutter/database/Cards.dart';
 
 class PlanetModel extends SmallCardModel{
   late int position;
@@ -103,6 +104,18 @@ class PlanetModel extends SmallCardModel{
   takeDamage(danger);
 
   return IA;
+  }
+
+  void moveTo(Cards c){
+    newCard(c);
+    controlled = true;
+  }
+
+  Cards moveFrom(){
+    Cards c = card;
+    blank();
+    controlled = false;
+    return c;
   }
 
 
