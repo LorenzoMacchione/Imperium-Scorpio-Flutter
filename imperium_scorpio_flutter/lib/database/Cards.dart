@@ -13,6 +13,7 @@ class Cards{
   int attack=-1;
   int mining=-1;
   int hp=-1;
+  int player =0;
 
 
   Cards(){}

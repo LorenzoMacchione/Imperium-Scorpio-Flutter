@@ -106,13 +106,21 @@ class PlanetModel extends SmallCardModel{
   return IA;
   }
 
-  void moveTo(Cards c){
-    newCard(c);
+  void moveTo(SmallCardModel c){
+    newCard(c.card);
+    hp = c.hp;
+    name = c.name;
+    res1 = c.res1;
+    res2 = c.res2;
+    res3 = c.res3;
+    res4 = c.res4;
+    attack = c.attack;
+    mining = c.mining;
     controlled = true;
   }
 
-  Cards moveFrom(){
-    Cards c = card;
+  SmallCardModel moveFrom(){
+    SmallCardModel c = copy();
     blank();
     controlled = false;
     return c;

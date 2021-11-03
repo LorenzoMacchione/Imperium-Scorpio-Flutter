@@ -41,18 +41,18 @@ class SmallCardModel{
     res4 = c.res4;
   }
 
-  /*copy():SmallCard{
-  val s = SmallCard(context)
-  s.newCard(this.card)
-  s._attack.value = this.attack.value
-  s._hp.value = this.hp.value
-  s._mining.value = this.mining.value
-  s._r1.value = this.r1.value
-  s._r2.value = this.r2.value
-  s._r3.value = this.r3.value
-  s._r4.value = this.r4.value
-  return s
-  }*/
+  SmallCardModel copy(){
+    var s = SmallCardModel();
+    s.newCard(this.card);
+    s.attack = this.attack;
+    s.hp= this.hp;
+    s.mining = this.mining;
+    s.res1 = this.res1;
+    s.res2 = this.res2;
+    s.res3 = this.res3;
+    s.res4 = this.res4;
+    return s;
+  }
 
   blank(){
     newCard( Cards());

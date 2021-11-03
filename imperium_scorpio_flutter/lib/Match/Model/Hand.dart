@@ -2,22 +2,49 @@
 
 
 
+import 'package:imperium_scorpio_flutter/Match/Model/SmallCardModel.dart';
 import 'package:imperium_scorpio_flutter/database/Cards.dart';
 
 class Hand{
-    List<Cards> hand = [];
+    List<SmallCardModel> hand = [];
+
+    Hand(){
+      SmallCardModel hc1 = SmallCardModel();
+      SmallCardModel hc2 = SmallCardModel();
+      SmallCardModel hc3 = SmallCardModel();
+      SmallCardModel hc4 = SmallCardModel();
+      SmallCardModel hc5 = SmallCardModel();
+      hand.add(hc1);
+      hand.add(hc2);
+      hand.add(hc3);
+      hand.add(hc4);
+      hand.add(hc5);
+    }
 
     addCard (Cards c){
       if (c.id!=-1){
-        if (hand.length<5) {hand.add(c);}
+          for(var i=0;i<5;i++) {
+            if (hand[i].hp == -1) {
+              hand[i].newCard(c);
+              return;
+            }
+          }
       }
     }
 
-    Cards read(int i) {
+
+    SmallCardModel read(int i) {
     return hand[i];
     }
 
+    Cards readCard(int i){
+      return hand[i].read();
+    }
+
     Cards takeCard(int i) {
-      return hand.removeAt(i);
+      var c = hand[i].read();
+      hand.removeAt(i);
+      hand.add(SmallCardModel());
+      return c;
     }
 }
