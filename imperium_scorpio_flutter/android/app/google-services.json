@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "32339165534",
+    "project_id": "imperium-scorpio-flutter",
+    "storage_bucket": "imperium-scorpio-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32339165534:android:b4fbd68a53ab91588d4fcf",
+        "android_client_info": {
+          "package_name": "com.rustichella_break.imperium_scorpio_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "32339165534-9dqea7ufm15ufd4rgi861brmpp6vpps3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAG8-pSaO19QchWbVc1vB94yTckUhP-Mcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "32339165534-9dqea7ufm15ufd4rgi861brmpp6vpps3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

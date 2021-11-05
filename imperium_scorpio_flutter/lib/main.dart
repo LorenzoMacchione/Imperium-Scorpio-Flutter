@@ -1,5 +1,6 @@
 
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:imperium_scorpio_flutter/database/CardDB.dart';
@@ -10,18 +11,35 @@ import 'Match/UI/MatchUI.dart';
 
 
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     return MaterialApp(
 
 
-      home: MyHomePage(),
+      home: FutureBuilder(
+        future: _fbApp,
+        builder: (context, snapshot){
+          if (snapshot.hasError){
+            print('Errore!! ${snapshot.error.toString()}');
+            return Text ('Qualcosa è andato storto');
+          } else if (snapshot.hasData) {
+            return MyHomePage();
+          }
+          else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      )
     );
   }
 }
