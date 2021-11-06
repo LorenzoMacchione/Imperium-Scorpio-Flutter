@@ -3,9 +3,11 @@
 
 
 import 'dart:convert';
+import 'dart:html';
 import 'dart:math';
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'MessageModel/RandomModel.dart';
 
@@ -16,13 +18,18 @@ late final DatabaseReference dbPlayer;
 
 
 
+
+
   void readyToPlay(String user/*, wait:Waiting_Room*/){
   final dbWaiting = dbRoot.child('wait');
   //dbWaiting.addChildEventListener(WaitingRoomListener(wait,user));
-  dbWaiting.push().set("value");
+  dbWaiting.push().set(user);
 
   dbWaiting.onChildAdded.listen((event) {
-    final d = event.snapshot.value;
+    final readyuser = event.snapshot.value;
+    if (!(user==readyuser)){
+
+    }
   });
   }
 
