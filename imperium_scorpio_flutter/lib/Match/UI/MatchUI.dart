@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:imperium_scorpio_flutter/Match/Model/Deck.dart';
 import 'package:imperium_scorpio_flutter/Match/Model/Hand.dart';
 import 'package:imperium_scorpio_flutter/Match/Model/PlanetModel.dart';
 import 'package:imperium_scorpio_flutter/Match/Model/ResourceModel.dart';
-import 'package:imperium_scorpio_flutter/Match/Model/SmallCardModel.dart';
 import 'package:imperium_scorpio_flutter/Match/UI/SmallCard.dart';
+import 'package:imperium_scorpio_flutter/Postal/Ermes.dart';
 import 'package:imperium_scorpio_flutter/database/Cards.dart';
 
 class MatchUI extends StatefulWidget {
@@ -14,18 +15,21 @@ class MatchUI extends StatefulWidget {
 }
 
 class _MatchState extends State {
+  Ermes ermes = Ermes();
   var activeCard = -1;
   var enemyHand = 3;
   var Planets = List<PlanetModel>.empty();
   var test = Cards.setCards(1, "valden", 0, 2, 0, 3, "text", 8, 2, 5);
+  var deck = Deck();
   var playerHand = Hand();
   bool dragging = false;
 
   _MatchState() {
     Planets = [p1, p2, p3, p4, p5, p6, p7, p8];
-    playerHand.addCard(test);
-    playerHand.addCard(test);
-    playerHand.addCard(test);
+    playerHand.addCard(deck.draw());
+    playerHand.addCard(deck.draw());
+    playerHand.addCard(deck.draw());
+    ermes.setGame("player", "enemy");
   }
 
   void refreshUI() {
@@ -748,7 +752,7 @@ class _MatchState extends State {
                   visible: p1.hp != -1,
                 ),
                 Visibility(
-                    visible: p1.range1.contains(activeCard) && !p1.controlled||dragging&&!p1.controlled,
+                    visible: (p1.range1.contains(activeCard) && !p1.controlled)||(dragging&&!p1.controlled),
                     child:DragTarget<int>(
                       builder: (context, candidateItems, rejectedItem){
                         return  MaterialButton(
@@ -762,7 +766,18 @@ class _MatchState extends State {
                         );
                       },
                       onAccept: (i){
-                        p1.newCard(playerHand.takeCard(i));
+                        if(playerHand.read(i).res1<=Res1.read()&&playerHand.read(i).res2<=Res2.read()&&
+                            playerHand.read(i).res3<=Res3.read()&&playerHand.read(i).res4<=Res4.read()) {
+                          Res1.useRes(playerHand.read(i).res1);
+                          Res2.useRes(playerHand.read(i).res2);
+                          Res3.useRes(playerHand.read(i).res3);
+                          Res4.useRes(playerHand.read(i).res4);
+                          p1.CardmoveTo(playerHand.takeCard(i));
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("Non hai abbastanza Risorse")
+                          ));
+                        }
                         dragging=false;
                         refreshUI();
                       },
@@ -1037,67 +1052,75 @@ class _MatchState extends State {
           visible: p9.controlled&&p9.player==0,
           child: Scaffold(
               backgroundColor: Colors.black.withOpacity(0.7),
-              body: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'WIN\n',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'sf',
-                          color: Colors.orangeAccent,
-                          fontSize: 75,
+              body: MaterialButton (
+                onPressed: (){Navigator.pop(context);},
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'WIN\n',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'sf',
+                            color: Colors.orangeAccent,
+                            fontSize: 75,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Text(
-                    'Tocca per continuare',
-                    style: TextStyle(
-                      fontFamily: 'sf',
-                      color: Colors.orangeAccent,
-                      fontSize: 30,
+                      ],
                     ),
-                  ),
-                ],
-              )),
+                    Text(
+                      'Tocca per continuare',
+                      style: TextStyle(
+                        fontFamily: 'sf',
+                        color: Colors.orangeAccent,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ],
+                )
+              )
+          ),
         ),
         Visibility(
           visible: p1.controlled&&p1.player==1,
           child: Scaffold(
               backgroundColor: Colors.black.withOpacity(0.7),
-              body: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'LOSE',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'laceration',
-                          color: Colors.red,
-                          fontSize: 70,
+              body: MaterialButton (
+                onPressed: (){Navigator.pop(context);},
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'LOSE',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'laceration',
+                            color: Colors.red,
+                            fontSize: 70,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Text(
-                    'Tocca per continuare',
-                    style: TextStyle(
-                      fontFamily: 'laceration',
-                      color: Colors.red,
-                      fontSize: 21,
+                      ],
                     ),
-                  ),
-                ],
-              )),
+                    Text(
+                      'Tocca per continuare',
+                      style: TextStyle(
+                        fontFamily: 'laceration',
+                        color: Colors.red,
+                        fontSize: 21,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+          ),
         )
       ],
     );

@@ -1,9 +1,11 @@
 <component name="libraryTable">
   <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
     <CLASSES>
-      <root url="file://$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.0+3" />
-      <root url="file://$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.8.0" />
-      <root url="file://$USER_HOME$/Documents/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.1.0" />
+      <root url="file://$USER_HOME$/Documents/flutter SDK/flutter_windows_2.2.3-stable/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.1.0" />
+      <root url="file://$USER_HOME$/Documents/flutter SDK/flutter_windows_2.2.3-stable/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.0+3" />
+      <root url="file://$USER_HOME$/Documents/flutter SDK/flutter_windows_2.2.3-stable/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.9.0" />
+      <root url="file://$USER_HOME$/Documents/flutter SDK/flutter_windows_2.2.3-stable/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_database_web-0.1.0+2" />
+      <root url="file://$USER_HOME$/Documents/flutter SDK/flutter_windows_2.2.3-stable/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_database-8.0.2" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

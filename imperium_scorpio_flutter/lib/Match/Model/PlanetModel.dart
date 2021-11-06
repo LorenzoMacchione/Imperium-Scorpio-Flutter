@@ -119,6 +119,19 @@ class PlanetModel extends SmallCardModel{
     controlled = true;
   }
 
+  void CardmoveTo(Cards c){
+    newCard(c);
+    hp = c.hp;
+    name = c.name;
+    res1 = c.res1;
+    res2 = c.res2;
+    res3 = c.res3;
+    res4 = c.res4;
+    attack = c.attack;
+    mining = c.mining;
+    controlled = true;
+  }
+
   SmallCardModel moveFrom(){
     SmallCardModel c = copy();
     blank();

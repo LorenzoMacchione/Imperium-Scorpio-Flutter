@@ -43,8 +43,10 @@ class Hand{
 
     Cards takeCard(int i) {
       var c = hand[i].read();
-      hand.removeAt(i);
-      hand.add(SmallCardModel());
+      for(;i<4;i++){
+        hand[i].newCard(hand[i+1].read());
+        hand[i+1].blank();
+      }
       return c;
     }
 }

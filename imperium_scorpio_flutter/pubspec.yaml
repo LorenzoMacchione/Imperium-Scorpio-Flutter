@@ -25,7 +25,8 @@ dependencies:
     sdk: flutter
   sqflite: any
   path: any
-  firebase_core: "^1.7.0"
+  firebase_core: "^1.9.0"
+  firebase_database: "^8.0.2"
 
 
 

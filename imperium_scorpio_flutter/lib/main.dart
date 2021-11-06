@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:imperium_scorpio_flutter/Postal/Ermes.dart';
 import 'package:imperium_scorpio_flutter/database/CardDB.dart';
 import 'package:flutter/services.dart';
 
@@ -18,6 +19,7 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
@@ -55,6 +57,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   CardDB db = CardDB();
+  Ermes ermes = Ermes();
+
 
 
   @override
@@ -91,6 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   MaterialButton(
                       onPressed: (){
+                        //ermes.readyToPlay("player");
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) {
