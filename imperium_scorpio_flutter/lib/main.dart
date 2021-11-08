@@ -6,8 +6,6 @@ import 'package:imperium_scorpio_flutter/WaitingRoom.dart';
 import 'package:imperium_scorpio_flutter/database/CardDB.dart';
 import 'package:flutter/services.dart';
 
-import 'Match/UI/MatchUI.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
@@ -85,6 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               MaterialButton(
                   onPressed: () {
+                    ermes = Ermes.withContext(context);
                     ermes.readyToPlay(username);
                     Navigator.push(
                       context,

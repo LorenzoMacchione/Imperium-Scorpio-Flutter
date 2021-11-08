@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:imperium_scorpio_flutter/Match/Model/Deck.dart';
+import 'package:imperium_scorpio_flutter/Match/Model/Enemy.dart';
 import 'package:imperium_scorpio_flutter/Match/Model/Hand.dart';
 import 'package:imperium_scorpio_flutter/Match/Model/PlanetModel.dart';
 import 'package:imperium_scorpio_flutter/Match/Model/ResourceModel.dart';
@@ -10,31 +11,46 @@ import 'package:imperium_scorpio_flutter/Postal/Ermes.dart';
 import 'package:imperium_scorpio_flutter/database/Cards.dart';
 
 class MatchUI extends StatefulWidget {
+  late String user;
+  late String enemy;
+
+  MatchUI(String user, enemy){
+    this.user = user;
+    this.enemy = enemy;
+  }
+
   @override
-  State<StatefulWidget> createState() => _MatchState();
+  State<StatefulWidget> createState() => _MatchState(user,enemy);
 }
 
 class _MatchState extends State {
   Ermes ermes = Ermes();
   var activeCard = -1;
-  var enemyHand = 3;
   var Planets = List<PlanetModel>.empty();
-  var test = Cards.setCards(1, "valden", 0, 2, 0, 3, "text", 8, 2, 5);
   var deck = Deck();
   var playerHand = Hand();
   bool dragging = false;
+  late Enemy enemy;
+  bool draw1 = false;
+  bool draw2 = false;
+  bool draw3 = false;
+  bool draw4 = false;
 
-  _MatchState() {
+  _MatchState(String user, String enemy) {
     Planets = [p1, p2, p3, p4, p5, p6, p7, p8];
     playerHand.addCard(deck.draw());
     playerHand.addCard(deck.draw());
     playerHand.addCard(deck.draw());
-    ermes.setGame("player", "enemy");
+    this.enemy = Enemy(refreshUI,Planets,eRes1,eRes2,eRes3,eRes4);
+    ermes = Ermes.match(context,this.enemy);
+    ermes.setGame(user, enemy);
   }
 
   void refreshUI() {
     setState(() {});
   }
+
+
 
   ResourceModel eRes1 = ResourceModel();
   ResourceModel eRes2 = ResourceModel();
@@ -89,7 +105,7 @@ class _MatchState extends State {
                             width: 45,
                             height: 45,
                           ),
-                          visible: enemyHand >= 1,
+                          visible: enemy.enemyHand >= 1,
                         ),
                         Visibility(
                           child: Container(
@@ -97,7 +113,7 @@ class _MatchState extends State {
                             width: 45,
                             height: 45,
                           ),
-                          visible: enemyHand >= 2,
+                          visible: enemy.enemyHand >= 2,
                         ),
                         Visibility(
                           child: Container(
@@ -105,7 +121,7 @@ class _MatchState extends State {
                             width: 45,
                             height: 45,
                           ),
-                          visible: enemyHand >= 3,
+                          visible: enemy.enemyHand >= 3,
                         ),
                         Visibility(
                           child: Container(
@@ -113,7 +129,7 @@ class _MatchState extends State {
                             width: 45,
                             height: 45,
                           ),
-                          visible: enemyHand >= 4,
+                          visible: enemy.enemyHand >= 4,
                         ),
                         Visibility(
                           child: Container(
@@ -121,7 +137,7 @@ class _MatchState extends State {
                             width: 45,
                             height: 45,
                           ),
-                          visible: enemyHand >= 5,
+                          visible: enemy.enemyHand >= 5,
                         ),
                       ],
                     ),
@@ -197,7 +213,7 @@ class _MatchState extends State {
                       height: 70,
                     ),
                     onPressed: () {
-                      if (p9.player != 1) {
+                      if (!ermes.Lock&&p9.player != 1) {
                         activeCard = 8;
                         refreshUI();
                       }
@@ -212,6 +228,8 @@ class _MatchState extends State {
                           scale: 0.94),
                       onPressed: () {
                         p9.moveTo(Planets[activeCard].moveFrom());
+                        ermes.moveMsg(activeCard, 8);
+                        ermes.lock();
                         activeCard = -1;
                         refreshUI();
                       },
@@ -227,6 +245,8 @@ class _MatchState extends State {
                         Res2.minRes(r[1]);
                         Res3.minRes(r[2]);
                         Res4.minRes(r[3]);
+                        ermes.miningMsg(p9.mining);
+                        ermes.lock();
                         activeCard = -1;
                         refreshUI();
                       },
@@ -237,7 +257,11 @@ class _MatchState extends State {
                         p9.player == 1,
                     child: MaterialButton(
                       onPressed: () {
+                        Cards c = p9.read();
                         p9.takeDamage(Planets[activeCard].attack);
+                        Planets[activeCard].takeDamage(c.attack);
+                        ermes.attackMsg(activeCard, 8);
+                        ermes.lock();
                         activeCard = -1;
                         refreshUI();
                       },
@@ -263,7 +287,7 @@ class _MatchState extends State {
                           height: 70,
                         ),
                         onPressed: () {
-                          if (p7.player != 1) {
+                          if (!ermes.Lock&&p7.player != 1) {
                             activeCard = 6;
                             refreshUI();
                           }
@@ -279,6 +303,8 @@ class _MatchState extends State {
                               scale: 0.94),
                           onPressed: () {
                             p7.moveTo(Planets[activeCard].moveFrom());
+                            ermes.moveMsg(activeCard, 6);
+                            ermes.lock();
                             activeCard = -1;
                             refreshUI();
                           },
@@ -294,6 +320,8 @@ class _MatchState extends State {
                             Res2.minRes(r[1]);
                             Res3.minRes(r[2]);
                             Res4.minRes(r[3]);
+                            ermes.miningMsg(p7.mining);
+                            ermes.lock();
                             activeCard = -1;
                             refreshUI();
                           },
@@ -304,7 +332,11 @@ class _MatchState extends State {
                             p7.player == 1,
                         child: MaterialButton(
                           onPressed: () {
+                            Cards c = p7.read();
                             p7.takeDamage(Planets[activeCard].attack);
+                            Planets[activeCard].takeDamage(c.attack);
+                            ermes.attackMsg(activeCard, 6);
+                            ermes.lock();
                             activeCard = -1;
                             refreshUI();
                           },
@@ -327,7 +359,7 @@ class _MatchState extends State {
                           height: 70,
                         ),
                         onPressed: () {
-                          if (p8.player != 1) {
+                          if (!ermes.Lock&&p8.player != 1) {
                             activeCard = 7;
                             refreshUI();
                           }
@@ -343,6 +375,8 @@ class _MatchState extends State {
                               scale: 0.94),
                           onPressed: () {
                             p8.moveTo(Planets[activeCard].moveFrom());
+                            ermes.moveMsg(activeCard, 7);
+                            ermes.lock();
                             activeCard = -1;
                             refreshUI();
                           },
@@ -358,6 +392,8 @@ class _MatchState extends State {
                             Res2.minRes(r[1]);
                             Res3.minRes(r[2]);
                             Res4.minRes(r[3]);
+                            ermes.miningMsg(p8.mining);
+                            ermes.lock();
                             activeCard = -1;
                             refreshUI();
                           },
@@ -368,7 +404,11 @@ class _MatchState extends State {
                             p8.player == 1,
                         child: MaterialButton(
                           onPressed: () {
+                            Cards c = p8.read();
                             p8.takeDamage(Planets[activeCard].attack);
+                            Planets[activeCard].takeDamage(c.attack);
+                            ermes.attackMsg(activeCard, 7);
+                            ermes.lock();
                             activeCard = -1;
                             refreshUI();
                           },
@@ -396,7 +436,7 @@ class _MatchState extends State {
                           height: 70,
                         ),
                         onPressed: () {
-                          if (p4.player != 1) {
+                          if (!ermes.Lock&&p4.player != 1) {
                             activeCard = 3;
                             refreshUI();
                           }
@@ -412,6 +452,7 @@ class _MatchState extends State {
                               scale: 0.94),
                           onPressed: () {
                             p4.moveTo(Planets[activeCard].moveFrom());
+                            ermes.lock();
                             activeCard = -1;
                             refreshUI();
                           },
@@ -427,6 +468,8 @@ class _MatchState extends State {
                             Res2.minRes(r[1]);
                             Res3.minRes(r[2]);
                             Res4.minRes(r[3]);
+                            ermes.miningMsg(p4.mining);
+                            ermes.lock();
                             activeCard = -1;
                             refreshUI();
                           },
@@ -437,7 +480,11 @@ class _MatchState extends State {
                             p4.player == 1,
                         child: MaterialButton(
                           onPressed: () {
+                            Cards c = p4.read();
                             p4.takeDamage(Planets[activeCard].attack);
+                            Planets[activeCard].takeDamage(c.attack);
+                            ermes.attackMsg(activeCard, 3);
+                            ermes.lock();
                             activeCard = -1;
                             refreshUI();
                           },
@@ -460,7 +507,7 @@ class _MatchState extends State {
                           height: 70,
                         ),
                         onPressed: () {
-                          if (p5.player != 1) {
+                          if (!ermes.Lock&&p5.player != 1) {
                             activeCard = 4;
                             refreshUI();
                           }
@@ -476,6 +523,8 @@ class _MatchState extends State {
                               scale: 0.94),
                           onPressed: () {
                             p5.moveTo(Planets[activeCard].moveFrom());
+                            ermes.moveMsg(activeCard, 4);
+                            ermes.lock();
                             activeCard = -1;
                             refreshUI();
                           },
@@ -491,6 +540,8 @@ class _MatchState extends State {
                             Res2.minRes(r[1]);
                             Res3.minRes(r[2]);
                             Res4.minRes(r[3]);
+                            ermes.miningMsg(p5.mining);
+                            ermes.lock();
                             activeCard = -1;
                             refreshUI();
                           },
@@ -501,7 +552,11 @@ class _MatchState extends State {
                             p5.player == 1,
                         child: MaterialButton(
                           onPressed: () {
+                            Cards c = p5.read();
                             p5.takeDamage(Planets[activeCard].attack);
+                            Planets[activeCard].takeDamage(c.attack);
+                            ermes.attackMsg(activeCard, 4);
+                            ermes.lock();
                             activeCard = -1;
                             refreshUI();
                           },
@@ -524,7 +579,7 @@ class _MatchState extends State {
                           height: 70,
                         ),
                         onPressed: () {
-                          if (p6.player != 1) {
+                          if (!ermes.Lock&&p6.player != 1) {
                             activeCard = 5;
                             refreshUI();
                           }
@@ -540,6 +595,7 @@ class _MatchState extends State {
                               scale: 0.94),
                           onPressed: () {
                             p6.moveTo(Planets[activeCard].moveFrom());
+                            ermes.moveMsg(activeCard, 5);
                             activeCard = -1;
                             refreshUI();
                           },
@@ -555,6 +611,8 @@ class _MatchState extends State {
                             Res2.minRes(r[1]);
                             Res3.minRes(r[2]);
                             Res4.minRes(r[3]);
+                            ermes.miningMsg(p6.mining);
+                            ermes.lock();
                             activeCard = -1;
                             refreshUI();
                           },
@@ -565,7 +623,11 @@ class _MatchState extends State {
                             p6.player == 1,
                         child: MaterialButton(
                           onPressed: () {
+                            Cards c = p6.read();
                             p6.takeDamage(Planets[activeCard].attack);
+                            Planets[activeCard].takeDamage(c.attack);
+                            ermes.attackMsg(activeCard, 5);
+                            ermes.lock();
                             activeCard = -1;
                             refreshUI();
                           },
@@ -593,7 +655,7 @@ class _MatchState extends State {
                           height: 70,
                         ),
                         onPressed: () {
-                          if (p2.player != 1) {
+                          if (!ermes.Lock&&p2.player != 1) {
                             activeCard = 1;
                             refreshUI();
                           }
@@ -602,9 +664,8 @@ class _MatchState extends State {
                       visible: p2.hp != -1,
                     ),
                     Visibility(
-                        visible:
-                            p2.range1.contains(activeCard) && !p2.controlled||dragging&&!p2.controlled,
-                        child: DragTarget<int>(
+                        visible: (p2.range1.contains(activeCard) && !p2.controlled)||(dragging&&!p2.controlled),
+                        child:DragTarget<int>(
                           builder: (context, candidateItems, rejectedItem){
                             return  MaterialButton(
                               child: Image.asset('assets/images/anello_verde.png',
@@ -612,12 +673,27 @@ class _MatchState extends State {
                               onPressed: () {
                                 p2.moveTo(Planets[activeCard].moveFrom());
                                 activeCard = -1;
+                                ermes.moveMsg(activeCard, 1);
+                                ermes.lock();
                                 refreshUI();
                               },
                             );
                           },
                           onAccept: (i){
-                            p2.newCard(playerHand.takeCard(i));
+                            if(playerHand.read(i).res1<=Res1.read()&&playerHand.read(i).res2<=Res2.read()&&
+                                playerHand.read(i).res3<=Res3.read()&&playerHand.read(i).res4<=Res4.read()) {
+                              Res1.useRes(playerHand.read(i).res1);
+                              Res2.useRes(playerHand.read(i).res2);
+                              Res3.useRes(playerHand.read(i).res3);
+                              Res4.useRes(playerHand.read(i).res4);
+                              p1.CardmoveTo(playerHand.takeCard(i));
+                              ermes.playCardMsg(1, p1.card.id);
+                              ermes.lock();
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                  content: Text("Non hai abbastanza Risorse")
+                              ));
+                            }
                             dragging=false;
                             refreshUI();
                           },
@@ -635,6 +711,8 @@ class _MatchState extends State {
                             Res3.minRes(r[2]);
                             Res4.minRes(r[3]);
                             activeCard = -1;
+                            ermes.miningMsg(p2.mining);
+                            ermes.lock();
                             refreshUI();
                           },
                         )),
@@ -644,8 +722,12 @@ class _MatchState extends State {
                             p2.player == 1,
                         child: MaterialButton(
                           onPressed: () {
+                            Cards c = p2.read();
                             p2.takeDamage(Planets[activeCard].attack);
+                            Planets[activeCard].takeDamage(c.attack);
                             activeCard = -1;
+                            ermes.attackMsg(activeCard, 1);
+                            ermes.lock();
                             refreshUI();
                           },
                           child: Image.asset('assets/images/anello_rosso.png',
@@ -667,7 +749,7 @@ class _MatchState extends State {
                           height: 70,
                         ),
                         onPressed: () {
-                          if (p3.player != 1) {
+                          if (!ermes.Lock&&p3.player != 1) {
                             activeCard = 2;
                             refreshUI();
                           }
@@ -676,26 +758,40 @@ class _MatchState extends State {
                       visible: p3.hp != -1,
                     ),
                     Visibility(
-                        visible:
-                            p3.range1.contains(activeCard) && !p3.controlled||dragging&&!p3.controlled,
+                        visible: (p3.range1.contains(activeCard) && !p3.controlled)||(dragging&&!p3.controlled),
                         child:DragTarget<int>(
-                            builder: (context, candidateItems, rejectedItem){
-                              return  MaterialButton(
-                                child: Image.asset('assets/images/anello_verde.png',
-                                    scale: 0.94),
-                                onPressed: () {
-                                  p3.moveTo(Planets[activeCard].moveFrom());
-                                  activeCard = -1;
-                                  refreshUI();
-                                },
-                              );
-                            },
-                            onAccept: (i){
-                              p3.newCard(playerHand.takeCard(i));
-                              dragging=false;
-                              refreshUI();
-                            },
-                          )
+                          builder: (context, candidateItems, rejectedItem){
+                            return  MaterialButton(
+                              child: Image.asset('assets/images/anello_verde.png',
+                                  scale: 0.94),
+                              onPressed: () {
+                                p3.moveTo(Planets[activeCard].moveFrom());
+                                activeCard = -1;
+                                ermes.moveMsg(activeCard, 2);
+                                ermes.lock();
+                                refreshUI();
+                              },
+                            );
+                          },
+                          onAccept: (i){
+                            if(playerHand.read(i).res1<=Res1.read()&&playerHand.read(i).res2<=Res2.read()&&
+                                playerHand.read(i).res3<=Res3.read()&&playerHand.read(i).res4<=Res4.read()) {
+                              Res1.useRes(playerHand.read(i).res1);
+                              Res2.useRes(playerHand.read(i).res2);
+                              Res3.useRes(playerHand.read(i).res3);
+                              Res4.useRes(playerHand.read(i).res4);
+                              p3.CardmoveTo(playerHand.takeCard(i));
+                              ermes.playCardMsg(2, p3.card.id);
+                              ermes.lock();
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                  content: Text("Non hai abbastanza Risorse")
+                              ));
+                            }
+                            dragging=false;
+                            refreshUI();
+                          },
+                        )
                     ),
                     Visibility(
                         visible: activeCard == 2,
@@ -709,6 +805,8 @@ class _MatchState extends State {
                             Res3.minRes(r[2]);
                             Res4.minRes(r[3]);
                             activeCard = -1;
+                            ermes.miningMsg(p3.mining);
+                            ermes.lock();
                             refreshUI();
                           },
                         )),
@@ -718,8 +816,12 @@ class _MatchState extends State {
                             p3.player == 1,
                         child: MaterialButton(
                           onPressed: () {
+                            Cards c = p3.read();
                             p3.takeDamage(Planets[activeCard].attack);
+                            Planets[activeCard].takeDamage(c.attack);
                             activeCard = -1;
+                            ermes.attackMsg(activeCard, 2);
+                            ermes.lock();
                             refreshUI();
                           },
                           child: Image.asset('assets/images/anello_rosso.png',
@@ -743,7 +845,7 @@ class _MatchState extends State {
                       height: 70,
                     ),
                     onPressed: () {
-                      if (p1.player != 1) {
+                      if (!ermes.Lock&&p1.player != 1) {
                         activeCard = 0;
                         refreshUI();
                       }
@@ -761,18 +863,22 @@ class _MatchState extends State {
                           onPressed: () {
                             p1.moveTo(Planets[activeCard].moveFrom());
                             activeCard = -1;
+                            ermes.moveMsg(activeCard, 0);
+                            ermes.lock();
                             refreshUI();
                           },
                         );
                       },
                       onAccept: (i){
-                        if(playerHand.read(i).res1<=Res1.read()&&playerHand.read(i).res2<=Res2.read()&&
-                            playerHand.read(i).res3<=Res3.read()&&playerHand.read(i).res4<=Res4.read()) {
+                        if((playerHand.read(i).res1<=Res1.read()&&playerHand.read(i).res2<=Res2.read()&&
+                            playerHand.read(i).res3<=Res3.read()&&playerHand.read(i).res4<=Res4.read())) {
                           Res1.useRes(playerHand.read(i).res1);
                           Res2.useRes(playerHand.read(i).res2);
                           Res3.useRes(playerHand.read(i).res3);
                           Res4.useRes(playerHand.read(i).res4);
                           p1.CardmoveTo(playerHand.takeCard(i));
+                          ermes.playCardMsg(0, p1.card.id);
+                          ermes.lock();
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text("Non hai abbastanza Risorse")
@@ -795,6 +901,8 @@ class _MatchState extends State {
                         Res3.minRes(r[2]);
                         Res4.minRes(r[3]);
                         activeCard = -1;
+                        ermes.miningMsg(p1.mining);
+                        ermes.lock();
                         refreshUI();
                       },
                     )),
@@ -804,8 +912,12 @@ class _MatchState extends State {
                         p1.player == 1,
                     child: MaterialButton(
                       onPressed: () {
+                        Cards c = p1.read();
                         p1.takeDamage(Planets[activeCard].attack);
+                        Planets[activeCard].takeDamage(c.attack);
                         activeCard = -1;
+                        ermes.attackMsg(activeCard, 0);
+                        ermes.lock();
                         refreshUI();
                       },
                       child: Image.asset('assets/images/anello_rosso.png',
@@ -823,7 +935,7 @@ class _MatchState extends State {
                             children: [
                               Visibility(
                                 child: MaterialButton(
-                                    onPressed: () {},
+                                    onPressed: () {Res1.useRes(1); playerHand.addCard(deck.draw());draw1=false;ermes.lock();refreshUI();},
                                     child: Container(
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.all(
@@ -846,15 +958,22 @@ class _MatchState extends State {
                                             color: Colors.white, fontSize: 15),
                                       ),
                                     )),
-                                visible: false,
+                                visible: draw1,
                               ),
                               Container(
                                 width: 40,
                                 color: Colors.deepPurple,
                                 alignment: Alignment.center,
-                                child: Text('${Res1.read()}',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 25)),
+                                child: MaterialButton(
+                                  onPressed: (){
+                                    if(!ermes.Lock){
+                                      draw1=true;
+                                      refreshUI();
+                                    }},
+                                  child: Text('${Res1.read()}',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 25)),
+                                )
                               ),
                             ],
                           ),
@@ -862,7 +981,7 @@ class _MatchState extends State {
                             children: [
                               Visibility(
                                 child: MaterialButton(
-                                    onPressed: () {},
+                                    onPressed: () {Res2.useRes(1); playerHand.addCard(deck.draw());draw2=false;ermes.lock();refreshUI();},
                                     child: Container(
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.all(
@@ -884,21 +1003,29 @@ class _MatchState extends State {
                                         style: TextStyle(fontSize: 15),
                                       ),
                                     )),
-                                visible: false,
+                                visible: draw2,
                               ),
                               Container(
                                   width: 40,
                                   color: Colors.lightBlue,
                                   alignment: Alignment.center,
-                                  child: Text('${Res1.read()}',
-                                      style: TextStyle(fontSize: 25))),
+                                  child: MaterialButton(
+                                    onPressed: (){
+                                      if(!ermes.Lock){
+                                        draw2=true;
+                                        refreshUI();
+                                      }
+                                    },
+                                    child: Text('${Res1.read()}',
+                                        style: TextStyle(fontSize: 25))),
+                                  )
                             ],
                           ),
                           Column(
                             children: [
                               Visibility(
                                 child: MaterialButton(
-                                    onPressed: () {},
+                                    onPressed: () {Res3.useRes(1); playerHand.addCard(deck.draw());draw3=false;ermes.lock();refreshUI();},
                                     child: Container(
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.all(
@@ -921,15 +1048,23 @@ class _MatchState extends State {
                                             color: Colors.white, fontSize: 15),
                                       ),
                                     )),
-                                visible: false,
+                                visible: draw3,
                               ),
                               Container(
                                 width: 40,
                                 color: Colors.black,
                                 alignment: Alignment.center,
-                                child: Text('${Res1.read()}',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 25)),
+                                child: MaterialButton(
+                                  onPressed: (){
+                                    if(!ermes.Lock){
+                                      draw3=true;
+                                      refreshUI();
+                                    }
+                                  },
+                                  child: Text('${Res1.read()}',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 25)),
+                                )
                               ),
                             ],
                           ),
@@ -937,7 +1072,7 @@ class _MatchState extends State {
                             children: [
                               Visibility(
                                 child: MaterialButton(
-                                    onPressed: () {},
+                                    onPressed: () {Res4.useRes(1); playerHand.addCard(deck.draw());draw4=false;ermes.lock();refreshUI();},
                                     child: Container(
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.all(
@@ -959,14 +1094,22 @@ class _MatchState extends State {
                                         style: TextStyle(fontSize: 15),
                                       ),
                                     )),
-                                visible: false,
+                                visible: draw4,
                               ),
                               Container(
                                 width: 40,
                                 color: Colors.white,
                                 alignment: Alignment.center,
-                                child: Text('${Res1.read()}',
-                                    style: TextStyle(fontSize: 25)),
+                                child: MaterialButton(
+                                  onPressed: (){
+                                    if(!ermes.Lock){
+                                      draw4=true;
+                                    refreshUI();
+                                    }
+                                  },
+                                  child: Text('${Res1.read()}',
+                                      style: TextStyle(fontSize: 25)),
+                                )
                               )
                             ],
                           ),
@@ -981,7 +1124,7 @@ class _MatchState extends State {
                               dragAnchorStrategy: pointerDragAnchorStrategy,
                               child: SmallCard(card: playerHand.read(0)),
                               data: 0,
-                              onDragStarted: (){dragging=true;activeCard=-1;refreshUI();},
+                              onDragStarted: (){dragging=!ermes.Lock;activeCard=-1;refreshUI();},
                               onDragEnd: (dd){dragging=false;refreshUI();},
                               feedback: SmallCard(
                                 card: playerHand.read(0),
@@ -994,7 +1137,7 @@ class _MatchState extends State {
                               dragAnchorStrategy: pointerDragAnchorStrategy,
                               child: SmallCard(card: playerHand.read(1)),
                               data: 1,
-                              onDragStarted: (){dragging=true;activeCard=-1;refreshUI();},
+                              onDragStarted: (){dragging=!ermes.Lock;activeCard=-1;refreshUI();},
                               onDragEnd: (dd){dragging=false;refreshUI();},
                               feedback: SmallCard(
                                 card: playerHand.read(1),
@@ -1007,7 +1150,7 @@ class _MatchState extends State {
                               dragAnchorStrategy: pointerDragAnchorStrategy,
                               child: SmallCard(card: playerHand.read(2)),
                               data: 2,
-                              onDragStarted: (){dragging=true;activeCard=-1;refreshUI();},
+                              onDragStarted: (){dragging=!ermes.Lock;activeCard=-1;refreshUI();},
                               onDragEnd: (dd){dragging=false;refreshUI();},
                               feedback: SmallCard(
                                 card: playerHand.read(2),
@@ -1020,7 +1163,7 @@ class _MatchState extends State {
                                 dragAnchorStrategy: pointerDragAnchorStrategy,
                                 child: SmallCard(card: playerHand.read(3)),
                                 data: 3,
-                                onDragStarted: (){dragging=true;activeCard=-1;refreshUI();},
+                                onDragStarted: (){dragging=!ermes.Lock;activeCard=-1;refreshUI();},
                                 onDragEnd: (dd){dragging=false;refreshUI();},
                                 feedback: SmallCard(
                                   card: playerHand.read(3),
@@ -1032,7 +1175,7 @@ class _MatchState extends State {
                                 dragAnchorStrategy: pointerDragAnchorStrategy,
                                 child: SmallCard(card: playerHand.read(4)),
                                 data: 4,
-                                onDragStarted: (){dragging=true;activeCard=-1;refreshUI();},
+                                onDragStarted: (){dragging=!ermes.Lock;activeCard=-1;refreshUI();},
                                 onDragEnd: (dd){dragging=false;refreshUI();},
                                 feedback: SmallCard(
                                   card: playerHand.read(4),
@@ -1086,7 +1229,7 @@ class _MatchState extends State {
           ),
         ),
         Visibility(
-          visible: p1.controlled&&p1.player==1,
+          visible: p1.player==1,
           child: Scaffold(
               backgroundColor: Colors.black.withOpacity(0.7),
               body: MaterialButton (
