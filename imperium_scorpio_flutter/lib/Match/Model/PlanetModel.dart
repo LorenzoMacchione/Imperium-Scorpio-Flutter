@@ -1,8 +1,8 @@
-
+///Classe che estende SmallCardModel per aggiungere dati e funzioni per gestire i pianeti e le carte presenti su di essi
 
 
 import 'package:imperium_scorpio_flutter/Match/Model/SmallCardModel.dart';
-import 'package:imperium_scorpio_flutter/database/Cards.dart';
+import 'package:imperium_scorpio_flutter/Match/Model/Cards.dart';
 
 class PlanetModel extends SmallCardModel{
   late int position;
@@ -13,7 +13,7 @@ class PlanetModel extends SmallCardModel{
   bool pRes4;
   bool controlled = false;
 
-  List<int> range1 = [];
+  List<int> range1 = []; ///Array contenente gli id dei pianeti adicenti usato per gestire le interazioni
 
   List<bool> pRes = [];
 
@@ -116,6 +116,7 @@ class PlanetModel extends SmallCardModel{
     res4 = c.res4;
     attack = c.attack;
     mining = c.mining;
+    player = c.player;
     controlled = true;
   }
 
@@ -129,6 +130,7 @@ class PlanetModel extends SmallCardModel{
     res4 = c.res4;
     attack = c.attack;
     mining = c.mining;
+    player = c.player;
     controlled = true;
   }
 

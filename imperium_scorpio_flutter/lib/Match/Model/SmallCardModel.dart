@@ -1,8 +1,9 @@
-
+///SmallCardModel è un oggetto che permette di lavorare su una copia dei dati della carta e mantenere le informazioni
+/// della carta originaria ad esempio se ci fosse un effeto di cura gli hp della carta non potrebbero eccedere il valore originario
 
 
 import 'package:flutter/cupertino.dart';
-import 'package:imperium_scorpio_flutter/database/Cards.dart';
+import 'package:imperium_scorpio_flutter/Match/Model/Cards.dart';
 
 class SmallCardModel{
 
@@ -51,6 +52,7 @@ class SmallCardModel{
     s.res2 = this.res2;
     s.res3 = this.res3;
     s.res4 = this.res4;
+    s.player = this.player;
     return s;
   }
 

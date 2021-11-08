@@ -1,4 +1,4 @@
-
+///Classe gestisce una risorsa
 
 class ResourceModel{
 

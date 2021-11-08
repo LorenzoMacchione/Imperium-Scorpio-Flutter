@@ -1,9 +1,8 @@
-
-
+///Collezione di SmallCardModel per la gestione della mano del giocatore
 
 
 import 'package:imperium_scorpio_flutter/Match/Model/SmallCardModel.dart';
-import 'package:imperium_scorpio_flutter/database/Cards.dart';
+import 'package:imperium_scorpio_flutter/Match/Model/Cards.dart';
 
 class Hand{
     List<SmallCardModel> hand = [];

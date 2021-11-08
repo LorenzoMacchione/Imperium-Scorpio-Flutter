@@ -1,21 +1,16 @@
 
+/// Collezione di oggetti di tipo Cards che ne gestisce il pescare di carte casuali
 
 import 'dart:math';
 
-import 'package:imperium_scorpio_flutter/database/CardDB.dart';
-import 'package:imperium_scorpio_flutter/database/Cards.dart';
+import 'package:imperium_scorpio_flutter/Match/Model/Cards.dart';
 
 class Deck{
 
   List<Cards> deck=[];
 
-  /*Deck(String code, CardDB db)  {
-    for (var i=0; i<code.length;i+2) {
-      String s = code.substring(i,i+1);
-      deck.add( db.getCardById(int.parse(s,radix: 16)) as Cards);
-    }
-  }*/
 
+///Crea le carte che poi verrano usate nel gioco
   Deck(){
     deck.add(Cards.setCards(1, "Valden", 0, 2, 0, 3, "", 8, 2, 5));
     deck.add(Cards.setCards(2, "Varga", 3, 2, 0, 1, "", 5, 5, 8));
@@ -40,6 +35,7 @@ class Deck{
 
   }
 
+  /// funzione per pescare una carta casuale
   Cards draw (){
     if (deck.length>0){
       int i = Random().nextInt(deck.length);

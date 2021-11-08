@@ -1,9 +1,9 @@
-
+///Widget che rappresenta le carte
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:imperium_scorpio_flutter/Match/Model/SmallCardModel.dart';
-import '../../database/Cards.dart';
+import '../Model/Cards.dart';
 
 class SmallCard extends StatefulWidget {
   SmallCardModel card;

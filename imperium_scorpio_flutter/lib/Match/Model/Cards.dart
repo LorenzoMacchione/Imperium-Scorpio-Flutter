@@ -1,5 +1,5 @@
-
-
+/// Questo oggetto corrisponde al modello dei dati contenuti in una carta
+/// Con un costruttore generico e uno specifico per creare le carte
 
 class Cards{
 
@@ -16,7 +16,7 @@ class Cards{
   int player =0;
 
 
-  Cards(){}
+  Cards();
 
   Cards.setCards(int id, String name, int res1, int res2,int res3, int res4, String text, int attack, int mining, int hp){
     this.id = id;
@@ -29,10 +29,6 @@ class Cards{
     this.attack = attack;
     this.mining = mining;
     this.hp = hp;
-  }
-
-  Map<String, dynamic> toMap(){
-    return { 'id':id, 'name': name, 'res1': res1, 'res2':res2,'res3':res3, 'res4':res4,'text':text,'attack':attack,'mining':mining,'hp':hp };
   }
 
 }

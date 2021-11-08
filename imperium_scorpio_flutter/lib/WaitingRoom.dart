@@ -1,4 +1,4 @@
-
+/// Classe che gestisce la visualizzazione durante la ricerca di altri giocatori
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
