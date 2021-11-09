@@ -1,7 +1,7 @@
 ///Classe che gestisce la partita
 
-import 'dart:html';
 import 'dart:io';
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -822,6 +822,7 @@ class _MatchState extends State {
                             ermes.miningMsg(2);
                             activeCard = -1;
                             ermes.lock();
+                            activeCard = -1;
                             refreshUI();
                           },
                         )),
@@ -837,6 +838,7 @@ class _MatchState extends State {
                             ermes.attackMsg(activeCard, 2);
                             activeCard = -1;
                             ermes.lock();
+                            activeCard = -1;
                             refreshUI();
                           },
                           child: Image.asset('assets/images/anello_rosso.png',
@@ -880,6 +882,7 @@ class _MatchState extends State {
                             ermes.moveMsg(activeCard, 0);
                             activeCard = -1;
                             ermes.lock();
+                            activeCard = -1;
                             refreshUI();
                           },
                         );
@@ -985,7 +988,11 @@ class _MatchState extends State {
                                 child: MaterialButton(
                                   onPressed: (){
                                     if(!ermes.Lock&&Res1.read()>0){
-                                      if(playerHand.size()==5) ;//TODO toast "hai la mano piena"
+                                      if(playerHand.size()==5) {
+                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                            content: Text("Non hai più lo spazio in mano")
+                                        ));
+                                      }
                                       else draw1=!draw1;
                                       refreshUI();
                                     }},
@@ -1033,7 +1040,11 @@ class _MatchState extends State {
                                   child: MaterialButton(
                                     onPressed: (){
                                       if(!ermes.Lock&&Res2.read()>0){
-                                        if(playerHand.size()==5) ;//TODO toast "hai la mano piena"
+                                        if(playerHand.size()==5) {
+                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                              content: Text("Non hai più spazio nella mano")
+                                          ));
+                                        }
                                         else draw2=!draw2;
                                         refreshUI();
                                       }
@@ -1081,7 +1092,11 @@ class _MatchState extends State {
                                 child: MaterialButton(
                                   onPressed: (){
                                     if(!ermes.Lock&&Res3.read()>0){
-                                      if(playerHand.size()==5) ;//TODO toast "hai la mano piena"
+                                      if(playerHand.size()==5) {
+                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                            content: Text("Non hai più spazio nella mano")
+                                        ));
+                                      }
                                       else draw3=!draw3;
                                       refreshUI();
                                     }
@@ -1130,7 +1145,11 @@ class _MatchState extends State {
                                 child: MaterialButton(
                                   onPressed: (){
                                     if(!ermes.Lock&&Res4.read()>0){
-                                      if(playerHand.size()==5) ;//TODO toast "hai la mano piena"
+                                      if(playerHand.size()==5) {
+                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                            content: Text("Non hai più spazio nella mano")
+                                        ));
+                                      }
                                       else draw4=!draw4;
                                     refreshUI();
                                     }

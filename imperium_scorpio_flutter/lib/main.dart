@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:imperium_scorpio_flutter/Postal/Ermes.dart';
+import 'package:imperium_scorpio_flutter/Rules.dart';
 import 'package:imperium_scorpio_flutter/WaitingRoom.dart';
 import 'package:flutter/services.dart';
 
@@ -110,6 +111,15 @@ class _MyHomePageState extends State<MyHomePage> {
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.white, fontSize: 25)))
               ])),
+          ElevatedButton.icon(
+              onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context){return Rules();}));},
+            label: Text(
+              "Rules",
+                  textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white),
+            ),
+            icon: Icon(CupertinoIcons.book_solid,color: Colors.white,size: 50),
+              ),
           ElevatedButton.icon(
             onPressed: () {
               ermes.clearDB();
