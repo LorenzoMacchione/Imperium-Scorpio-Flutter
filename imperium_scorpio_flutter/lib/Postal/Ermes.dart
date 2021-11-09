@@ -19,6 +19,8 @@ late Enemy enemy;
 int initiative =0;
 bool Lock = true;
 
+  String turn = "";
+
 Ermes();
 
 Ermes.withContext(BuildContext context){
@@ -29,8 +31,8 @@ Ermes.match(Enemy enemy){
   this.enemy = enemy;
 }
 
-void lock(){Lock = true;}
-void unlock(){Lock = false;}
+void lock(){Lock = true;turn="ENEMY TURN";}
+void unlock(){Lock = false;turn="PLAYER TURN";}
 
 
   void clearDB(){

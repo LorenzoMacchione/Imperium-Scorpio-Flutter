@@ -48,4 +48,12 @@ class Hand{
       }
       return c;
     }
+
+  int size() {
+      int c=0;
+      for (int i=0;i<5;i++){
+        if(hand[i].card.id!=-1)c++;
+      }
+      return c;
+  }
 }

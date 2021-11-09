@@ -42,7 +42,10 @@ class SmallCard extends StatefulWidget {
         alignment: Alignment.center,
         children: [
           Image.asset('assets/images/small_card_background.png'),
-          Image.asset('assets/images/card_${card.card.id}.png'),
+          RotatedBox(
+            quarterTurns: card.player+(card.player%2),
+            child: Image.asset('assets/images/card_${card.card.id}.png'),
+          ),
           Scaffold(
             backgroundColor: Colors.transparent,
             body: Center(

@@ -1,5 +1,8 @@
 ///Classe che gestisce la partita
 
+import 'dart:html';
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -201,9 +204,17 @@ class _MatchState extends State {
               Container(
                 height: 25,
               ),
+              Text(
+                "${ermes.turn}",
+                style: TextStyle(
+                  backgroundColor: Colors.lightBlue,
+                  color: Colors.yellow,
+                  fontFamily: 'laceration'
+                ),
+              ),
               Stack(alignment: Alignment.center, children: [
                 Image.asset(
-                  'assets/images/ice.png',
+                  'assets/images/islands.png',
                   scale: 0.5,
                   width: 85,
                   height: 85,
@@ -277,7 +288,7 @@ class _MatchState extends State {
                 children: [
                   Stack(alignment: Alignment.center, children: [
                     Image.asset(
-                      'assets/images/ice.png',
+                      'assets/images/water.png',
                       scale: 0.5,
                       width: 85,
                       height: 85,
@@ -349,7 +360,7 @@ class _MatchState extends State {
                   ]),
                   Stack(alignment: Alignment.center, children: [
                     Image.asset(
-                      'assets/images/ice.png',
+                      'assets/images/redp.png',
                       scale: 0.5,
                       width: 85,
                       height: 85,
@@ -426,7 +437,7 @@ class _MatchState extends State {
                 children: [
                   Stack(alignment: Alignment.center, children: [
                     Image.asset(
-                      'assets/images/ice.png',
+                      'assets/images/baren.png',
                       scale: 0.5,
                       width: 85,
                       height: 85,
@@ -498,7 +509,7 @@ class _MatchState extends State {
                   ]),
                   Stack(alignment: Alignment.center, children: [
                     Image.asset(
-                      'assets/images/ice.png',
+                      'assets/images/star.png',
                       scale: 0.5,
                       width: 85,
                       height: 85,
@@ -570,7 +581,7 @@ class _MatchState extends State {
                   ]),
                   Stack(alignment: Alignment.center, children: [
                     Image.asset(
-                      'assets/images/ice.png',
+                      'assets/images/toxic.png',
                       scale: 0.5,
                       width: 85,
                       height: 85,
@@ -646,7 +657,7 @@ class _MatchState extends State {
                 children: [
                   Stack(alignment: Alignment.center, children: [
                     Image.asset(
-                      'assets/images/ice.png',
+                      'assets/images/lava.png',
                       scale: 0.5,
                       width: 85,
                       height: 85,
@@ -836,7 +847,7 @@ class _MatchState extends State {
               ),
               Stack(alignment: Alignment.center, children: [
                 Image.asset(
-                  'assets/images/ice.png',
+                  'assets/images/terran.png',
                   scale: 0.5,
                   width: 85,
                   height: 85,
@@ -973,8 +984,9 @@ class _MatchState extends State {
                                 alignment: Alignment.center,
                                 child: MaterialButton(
                                   onPressed: (){
-                                    if(!ermes.Lock){
-                                      draw1=!draw1;
+                                    if(!ermes.Lock&&Res1.read()>0){
+                                      if(playerHand.size()==5) ;//TODO toast "hai la mano piena"
+                                      else draw1=!draw1;
                                       refreshUI();
                                     }},
                                   child: Text('${Res1.read()}',
@@ -1020,8 +1032,9 @@ class _MatchState extends State {
                                   alignment: Alignment.center,
                                   child: MaterialButton(
                                     onPressed: (){
-                                      if(!ermes.Lock){
-                                        draw2=!draw2;
+                                      if(!ermes.Lock&&Res2.read()>0){
+                                        if(playerHand.size()==5) ;//TODO toast "hai la mano piena"
+                                        else draw2=!draw2;
                                         refreshUI();
                                       }
                                     },
@@ -1067,8 +1080,9 @@ class _MatchState extends State {
                                 alignment: Alignment.center,
                                 child: MaterialButton(
                                   onPressed: (){
-                                    if(!ermes.Lock){
-                                      draw3=!draw3;
+                                    if(!ermes.Lock&&Res3.read()>0){
+                                      if(playerHand.size()==5) ;//TODO toast "hai la mano piena"
+                                      else draw3=!draw3;
                                       refreshUI();
                                     }
                                   },
@@ -1115,8 +1129,9 @@ class _MatchState extends State {
                                 alignment: Alignment.center,
                                 child: MaterialButton(
                                   onPressed: (){
-                                    if(!ermes.Lock){
-                                      draw4=!draw4;
+                                    if(!ermes.Lock&&Res4.read()>0){
+                                      if(playerHand.size()==5) ;//TODO toast "hai la mano piena"
+                                      else draw4=!draw4;
                                     refreshUI();
                                     }
                                   },
@@ -1209,7 +1224,7 @@ class _MatchState extends State {
           child: Scaffold(
               backgroundColor: Colors.black.withOpacity(0.7),
               body: MaterialButton (
-                onPressed: (){ermes.clearMatch();Navigator.pop(context);},
+                onPressed: (){ermes.clearMatch();exit(0);},
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -1246,7 +1261,7 @@ class _MatchState extends State {
           child: Scaffold(
               backgroundColor: Colors.black.withOpacity(0.7),
               body: MaterialButton (
-                onPressed: (){ermes.clearMatch();Navigator.pop(context);},
+                onPressed: (){ermes.clearMatch();exit(0);},
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
